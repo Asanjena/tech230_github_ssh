@@ -89,4 +89,4 @@ If the above steps have been successful, you should get the following output:
 ```
 git clone git@github.com:Asanjena/tech230_github_ssh.git
 ```
-5. Finally, 'ls' to see if the repo folder appears.
+5. Finally, 'ls' to see if the repo folder appears
