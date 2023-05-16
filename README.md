@@ -12,11 +12,13 @@ cd .ssh
 4. Once you are in the right place, type the following:
 ```
 ssh-keygen -t rsa -b 4096 -C "asanje99@gmail.com"
+
+**note** where I have put asanje99@gmail.com, you would enter your github email.
 ```
-5. You should then enter the name of your github repo. The output shouls look like this:
+5. You should then enter the name you would like to give to your keys. The output should look like this:
 ![Alt text](image1.PNG)
 
-You can then enter add a password on the ssh key, and press enter twice, but this is optional. 
+You can then add a password on the ssh key, and press enter twice, but this is optional. 
 
 As you can see in the image above, the output wikll display a graphic image and this means that a public and a private key have been generated. 
 
@@ -45,7 +47,7 @@ alema_github_ssh_test.pub
  This will give you a long key that you must copy and paste to github 'key' section. 
 ![Alt text](ssh_key_input.PNG)
 
-4. You may be prompted to login again by entering your password. You should then be able to see your key displayed on the screen. 
+4. You may be prompted to login again by entering your password. After logging in, you should then be able to see your key displayed on the screen. 
 
 5. In your bash terminal, type the following one after the other:
 
@@ -54,6 +56,8 @@ ssh-agent -s
 ```
 ```
 ssh-add ~/.ssh/alema_github_ssh_test
+
+**note - where I have put alema_github_ssh_test, you would enter the name you gave your key.
 ```
 ```
 ssh -T git@github.com
@@ -61,32 +65,42 @@ ssh -T git@github.com
 The final command will check your connection to github. if you come across issues, try the following:
 
 ```
-chmod 644 ssh/alema_github_ssh_test
+eval "$(ssh-agent -s)"
+
 ```
-```
-eval ssh-agent -s
-```
+This should return the following output:
+![Alt text](eval_output.PNG)
+
+Follow with the command:
 ```
 ssh-add ~/.ssh/alema_github_ssh_test
 ```
+And finally test the connection to github with:
 ```
 ssh -T git@github.com
 ```
-**note** where I have entered lema_github_ssh_test, you would change it to what your tite was when yiu made the key.
+**note** where I have entered alema_github_ssh_test, you would change it to what you named your key.
 
 If the above steps have been successful, you should get the following output:
 ![Alt text](successful_authentication.PNG)
 
-## Pushing changes to existing repo
 
-1. Make a change to a file and follow the normal steps to push to github
-2. On github, create a new repo. Select the green 'code' icon and choose 'select SSH'. Copy the key:
+### Pulling repos to local machine
 
-![Alt text](code_SSH.PNG)
+1. In your bash terminal, locate to where you would like to put the repo from github, using the 'cd' command.
+2. From your github repo, copy the ssh url:
 
-3. In bash, cd into overal folder e.g. "TECH230 Visualisation"
-4. Type git clone and paste the copied SSH:
-```
-git clone git@github.com:Asanjena/tech230_github_ssh.git
-```
-5. Finally, 'ls' to see if the repo folder appears
+![ssh url](ssh_url.PNG)
+
+3. In your bash terminal, type 'git clone' and paste the ssh url you copied:
+
+![Alt text](git_clone_ssh.PNG)
+
+You should then be able to see the repo and a readme file (if you added one when creating your repo) in the right directory. 
+
+## Testing ushing changes to remote repo
+
+1. Make a change to a file in your repo and follow the normal steps to push to github (git status, git add ., git commit -m "", git push)
+2. If this is successful, you should be able to view the changes you have made on github 
+
+
